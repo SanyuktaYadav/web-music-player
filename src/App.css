@@ -86,10 +86,14 @@ nav ul li {
   border: 1px solid white;
   color: white;
   margin: 12px 0;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   align-items: center;
   font-weight: 400;
   border-radius: 20px;
+}
+
+.song_name { 
+  width: 200px;
 }
 
 .song_item img {
@@ -114,4 +118,11 @@ nav ul li {
 .song_info img{
   opacity: 0;
   transition: opacity 0.4s ease-in;
+}
+
+.button-play, .button-pause {
+  margin: 10px;
+  padding: 4px;
+  background-color: aquamarine;
+  color: black;
 }

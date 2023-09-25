@@ -1,18 +1,29 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./App.css";
 import logo from "./images/logo.png";
 import backgroundImage from "./images/bg.jpg";
-import { FaRegPlayCircle } from "react-icons/fa";
-import { BiSkipPreviousCircle, BiSkipNextCircle } from "react-icons/bi";
+import { songsdata } from "./audio.js";
 
 function App() {
+  function importAll(r) {
+    return r.keys().map(r);
+  }
+
+  const images = importAll(
+    require.context("./images/covers", false, /\.(png|jpe?g|svg|webp)$/)
+  );
+  const audios = importAll(require.context("./songs/", false, /\.mp3/));
+
+  // const [isPlaying, setIsPlaying] = useState(false);
+  const currentSong = useRef();
+
   const NavBar = () => {
     return (
       <nav>
         <ul>
-          <li class="brand">
-            <img src={logo} alt="spotify logo" />
-            <span>Spotify</span>
+          <li className="brand">
+            <img src={logo} alt="music logo" />
+            <span>Music</span>
           </li>
           <li>Home</li>
           <li>About</li>
@@ -21,165 +32,80 @@ function App() {
     );
   };
 
+  // const playPause = (index) => {
+  //   currentSong.current.play();
+
+  //   setIsPlaying(!isPlaying);
+
+  //   if (isPlaying) {
+  //     currentSong.current.pause();
+  //   } else {
+  //     currentSong.current.play();
+  //   }
+  // };
+
+  const play = (index) => {
+    currentSong.current.src = audios[index];
+    currentSong.current.play();
+  };
+
+  const pause = (index) => {
+    currentSong.current.src = audios[index];
+    currentSong.current.pause();
+  };
+
   const Container = () => {
     return (
       <div
-        class="container"
+        className="container"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       >
-        <div class="song_list">
-          <h1>Best of NCS - No Copyright Sounds</h1>
-          <div class="song_item_container">
-            <div class="song_item">
-              <img alt="1" />
-              <span class="song_name">First Song</span>
-              <span class="songlistplay">
-                <span class="timestamp">
-                  05:34
-                  <i id="0" class="far song_item_play fa-play-circle"></i>
-                </span>
-              </span>
-            </div>
+        <div className="song_list">
+          <h1>Bollywood Songs</h1>
+          <div className="song_item_container">
+            {songsdata.map((obj, index) => (
+              <div className="song_item">
+                <img key={index} src={images[index]} alt="info" />
+                <span className="song_name">{obj.title}</span>
 
-            <div class="song_item">
-              <img alt="1" />
-              <span class="song_name">First Song</span>
-              <span class="songlistplay">
-                <span class="timestamp">
-                  05:34
-                  <i id="1" class="far song_item_play fa-play-circle"></i>
-                </span>
-              </span>
-            </div>
+                <span className="songlistplay">
+                  <button
+                    className="button-play"
+                    key={"button-play" + index}
+                    onClick={() => {
+                      play(index);
+                    }}
+                  >
+                    Play
+                  </button>
 
-            <div class="song_item">
-              <img alt="1" />
-              <span class="song_name">First Song</span>
-              <span class="songlistplay">
-                <span class="timestamp">
-                  05:34
-                  <i id="2" class="far song_item_play fa-play-circle"></i>
+                  <button
+                    className="button-pause"
+                    key={"button-pause" + index}
+                    onClick={() => {
+                      pause(index);
+                    }}
+                  >
+                    Pause
+                  </button>
                 </span>
-              </span>
-            </div>
-
-            <div class="song_item">
-              <img alt="1" />
-              <span class="song_name">First Song</span>
-              <span class="songlistplay">
-                <span class="timestamp">
-                  05:34
-                  <i id="3" class="far song_item_play fa-play-circle"></i>
-                </span>
-              </span>
-            </div>
-
-            <div class="song_item">
-              <img alt="1" />
-              <span class="song_name">First Song</span>
-              <span class="songlistplay">
-                <span class="timestamp">
-                  05:34
-                  <i id="4" class="far song_item_play fa-play-circle"></i>
-                </span>
-              </span>
-            </div>
-
-            <div class="song_item">
-              <img alt="1" />
-              <span class="song_name">First Song</span>
-              <span class="songlistplay">
-                <span class="timestamp">
-                  05:34
-                  <i id="5" class="far song_item_play fa-play-circle"></i>
-                </span>
-              </span>
-            </div>
-
-            <div class="song_item">
-              <img alt="1" />
-              <span class="song_name">First Song</span>
-              <span class="songlistplay">
-                <span class="timestamp">
-                  05:34
-                  <i id="6" class="far song_item_play fa-play-circle"></i>
-                </span>
-              </span>
-            </div>
-
-            <div class="song_item">
-              <img alt="1" />
-              <span class="song_name">First Song</span>
-              <span class="songlistplay">
-                <span class="timestamp">
-                  05:34
-                  <i id="7" class="far song_item_play fa-play-circle"></i>
-                </span>
-              </span>
-            </div>
-
-            <div class="song_item">
-              <img alt="1" />
-              <span class="song_name">First Song</span>
-              <span class="songlistplay">
-                <span class="timestamp">
-                  05:34
-                  <i id="8" class="far song_item_play fa-play-circle"></i>
-                </span>
-              </span>
-            </div>
-
-            <div class="song_item">
-              <img alt="1" />
-              <span class="song_name">First Song</span>
-              <span class="songlistplay">
-                <span class="timestamp">
-                  05:34
-                  <i id="9" class="far song_item_play fa-play-circle"></i>
-                </span>
-              </span>
-            </div>
+              </div>
+            ))}
           </div>
         </div>
-
-        <div class="song_banner"></div>
       </div>
     );
   };
 
-  const Bottom = () => {
-    return (
-      <div class="bottom">
-        <input
-          type="range"
-          name="range"
-          id="my_progress_bar"
-          min="0"
-          max="100"
-          value="0"
-        />
-        <div class="icons">
-          {
-            //fontawesome icons
-          }
-          <BiSkipPreviousCircle size={42} />
-          <FaRegPlayCircle size={42} />
-          <BiSkipNextCircle size={42} />
-        </div>
-
-        <div class="song_info">
-          <img src="playing.gif" width="42px" alt="" id="gif" />
-          <span id="master_song_name"></span>
-        </div>
-      </div>
-    );
+  const Player = () => {
+    return <audio src={audios[0]} ref={currentSong}></audio>;
   };
 
   return (
     <div className="App">
       <NavBar />
       <Container />
-      <Bottom />
+      <Player />
     </div>
   );
 }
