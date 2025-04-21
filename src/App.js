@@ -75,8 +75,9 @@ function App() {
                     onClick={() => {
                       play(index);
                     }}
+                    style={{ borderRadius: "30%" }}
                   >
-                    Play
+                    <b>Play</b>
                   </button>
 
                   <button
@@ -85,8 +86,9 @@ function App() {
                     onClick={() => {
                       pause(index);
                     }}
+                    style={{ borderRadius: "30%" }}
                   >
-                    Pause
+                    <b>Pause</b>
                   </button>
                 </span>
               </div>
